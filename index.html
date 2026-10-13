@@ -1,0 +1,337 @@
+<!DOCTYPE html><html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>AXIOM</title><style>
+:root{--bg:#0f1115;--cd:#171a21;--tx:#e6e8ee;--mu:#8b91a1;--bd:#262b36;--ac:#6366f1;--ac2:#6366f1;--gold:#d9a441;--g:#3fb27f;--r:#e5646e;--y:#5c4c12;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6f7f9;--cd:#ffffff;--tx:#181a20;--mu:#6b7280;--bd:#e3e6ec;--ac:#4f46e5;--ac2:#4f46e5;--gold:#b7791f;--g:#15803d;--r:#dc2626;--y:#fde68a}}
+:root[data-theme="light"]{--bg:#f6f7f9;--cd:#ffffff;--tx:#181a20;--mu:#6b7280;--bd:#e3e6ec;--ac:#4f46e5;--ac2:#4f46e5;--gold:#b7791f;--g:#15803d;--r:#dc2626;--y:#fde68a}
+:root[data-theme="dark"]{--bg:#0f1115;--cd:#171a21;--tx:#e6e8ee;--mu:#8b91a1;--bd:#262b36;--ac:#6366f1;--ac2:#6366f1;--gold:#d9a441;--g:#3fb27f;--r:#e5646e;--y:#5c4c12}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 system-ui,Segoe UI,sans-serif}
+#app{max-width:1000px;margin:0 auto;padding:12px}
+h1{font-size:18px;margin:0}h2{font-size:15px;margin:14px 0 6px}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+button,select,input{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--bd);border-radius:8px;padding:6px 10px}
+button{cursor:pointer}button.p{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600}
+button.t.on{border-color:var(--ac);color:var(--ac)}button.big{padding:12px 20px;font-size:16px}
+button:disabled{opacity:.5}
+.cd{background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:12px;margin:8px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.mu{color:var(--mu)}.w{color:var(--g)}.l{color:var(--r)}
+.b{font-size:11px;padding:2px 7px;border-radius:99px;border:1px solid var(--bd)}.b.o{border-color:var(--ac);color:var(--ac)}
+.sc{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:5px 6px;text-align:left;border-bottom:1px solid var(--bd);white-space:nowrap}
+th.s{cursor:pointer}td input,td select{width:100%;min-width:42px;padding:3px 5px}.lo{background:var(--y)!important}
+.bar{height:6px;background:var(--bd);border-radius:4px;min-width:60px}.bar i{display:block;height:100%;background:var(--g);border-radius:4px}
+.ch{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border-radius:6px;font-size:11px;font-weight:700;color:#fff;margin-right:6px;vertical-align:middle}
+.v{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border-radius:5px;font-weight:700;color:#fff;margin-right:3px}
+.dz{border:2px dashed var(--bd);border-radius:12px;padding:24px;text-align:center}
+.msg{background:var(--cd);border:1px solid var(--ac);border-radius:10px;padding:10px;margin:8px 0}
+.err{border-color:var(--r)}details>summary{cursor:pointer;list-style:none}
+#toast{display:none;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:600px;margin:auto;background:var(--cd);border:1px solid var(--ac);border-radius:10px;padding:10px 14px;z-index:9;box-shadow:0 4px 20px #0006}
+.ty-s{background:color-mix(in srgb,var(--cd) 82%,#3b82f6);border-color:#3b82f6aa}
+.ty-o{background:color-mix(in srgb,var(--cd) 80%,#f59e0b);border-color:#f59e0baa}
+.b.ts{border-color:#3b82f6;color:#60a5fa}.b.to{border-color:#f59e0b;color:#fbbf24}
+.blue{border-left:3px solid #3b82f6}.red{border-left:3px solid #ef4444}
+
+body{background:var(--bg)}
+h1{background:none;color:var(--tx);font-size:20px;font-weight:600}
+h2{color:var(--tx);font-size:14px;font-weight:600}
+.cd{background:var(--cd);box-shadow:none;border-radius:10px}
+button.p{background:var(--ac);border:1px solid var(--ac);color:#fff;box-shadow:none}
+button.t.on{background:transparent;border-color:var(--ac);color:var(--tx);box-shadow:inset 0 -2px var(--ac)}
+input:focus,select:focus{outline:1px solid var(--ac)}
+th{color:var(--mu);font-size:11px;text-transform:uppercase;letter-spacing:.4px;font-weight:600}
+.bar i{background:var(--g)}
+.ty-s{background:color-mix(in srgb,var(--cd) 82%,#5b8def);border-color:color-mix(in srgb,#5b8def 40%,var(--bd));border-left:4px solid #5b8def}
+.ty-o{background:color-mix(in srgb,var(--cd) 80%,#d9a441);border-color:color-mix(in srgb,#d9a441 40%,var(--bd));border-left:4px solid #d9a441}
+.b.ts{border-color:#5b8def;color:#7aa2f7;background:color-mix(in srgb,#5b8def 16%,transparent)}.b.to{border-color:#d9a441;color:var(--gold);background:color-mix(in srgb,#d9a441 16%,transparent)}
+.dz{border-color:var(--bd);background:transparent}
+.msg{border-color:var(--bd)}
+.w{color:var(--g)}.l{color:var(--r)}
+
+:root{--t1:#8c8cf0;--t2:#5fb3a8;--t3:#d6a85c;--t4:#d98a9b;--t5:#6fa0d8}
+body[data-tab=pl]{background:color-mix(in srgb,var(--bg) 93%,var(--t1))}
+body[data-tab=opp]{background:color-mix(in srgb,var(--bg) 93%,var(--t2))}
+body[data-tab=set]{background:color-mix(in srgb,var(--bg) 94%,var(--t3))}
+body[data-tab=new]{background:color-mix(in srgb,var(--bg) 94%,var(--t5))}
+.grid>.cd:nth-child(1){background:color-mix(in srgb,var(--cd) 87%,var(--t1))}
+.grid>.cd:nth-child(2){background:color-mix(in srgb,var(--cd) 87%,var(--t2))}
+.grid>.cd:nth-child(3){background:color-mix(in srgb,var(--cd) 87%,var(--t3))}
+.grid>.cd:nth-child(4){background:color-mix(in srgb,var(--cd) 87%,var(--t4))}
+.grid>.cd:nth-child(5){background:color-mix(in srgb,var(--cd) 87%,var(--t5))}
+.grid>.cd:nth-child(6){background:color-mix(in srgb,var(--cd) 87%,var(--t1))}
+.pa{background:color-mix(in srgb,var(--cd) 90%,var(--t1))}
+.pb{background:color-mix(in srgb,var(--cd) 92%,var(--t2))}
+th{background:color-mix(in srgb,var(--tx) 5%,transparent)}
+tr:nth-child(even) td{background:color-mix(in srgb,var(--tx) 3.5%,transparent)}
+</style></head><body><div id="app"></div><div id="toast"></div><script>window.SNAP={"team":"AXIOM","at":"13/10/26, 13:38","players":[{"id":"damoss0004","name":"WashedUp Damoss","names":["WashedUp Damoss"],"role":"ADC"},{"id":"onii000002","name":"Onii","names":["Onii"],"role":"JUNGLE"},{"id":"ruben00003","name":"rubēn","names":["rubēn"],"role":"MID"},{"id":"scooby0001","name":"Scooby","names":["Scooby"],"role":"TOP"},{"id":"vqd4quk25vwo","name":"COCOTRAK","names":["COCOTRAK"],"role":"SUPPORT"}],"series":[{"id":"4unvowf7nmj6","date":"2026-10-11","format":"BO3","games":[{"bans":{"blue":[],"red":[]},"dur":1559,"n":1,"p":[{"a":22,"champ":"Nami","cs":34,"d":0,"dmg":null,"gold":8082,"k":0,"name":"COCOTRAK","pid":"vqd4quk25vwo","role":"SUPPORT","team":"blue"},{"a":6,"champ":"K'Sante","cs":209,"d":3,"dmg":null,"gold":9467,"k":0,"name":"Scooby","pid":"scooby0001","role":"TOP","team":"blue"},{"a":11,"champ":"Lilia","cs":237,"d":0,"dmg":null,"gold":14477,"k":11,"name":"Onii","pid":"onii000002","role":"JUNGLE","team":"blue"},{"a":4,"champ":"Akali","cs":191,"d":2,"dmg":null,"gold":10896,"k":10,"name":"rubēn","pid":"ruben00003","role":"MID","team":"blue"},{"a":13,"champ":"Ezreal","cs":247,"d":0,"dmg":null,"gold":14504,"k":5,"name":"WashedUp Damoss","pid":"damoss0004","role":"ADC","team":"blue"},{"a":1,"champ":"Gnar","cs":195,"d":5,"dmg":null,"gold":8454,"k":2,"name":"MCU Arak","pid":null,"role":"TOP","team":"red"},{"a":3,"champ":"Vi","cs":153,"d":4,"dmg":null,"gold":7950,"k":1,"name":"AH Citronn","pid":null,"role":"JUNGLE","team":"red"},{"a":1,"champ":"Malzahar","cs":155,"d":8,"dmg":null,"gold":6998,"k":1,"name":"thinkov","pid":null,"role":"MID","team":"red"},{"a":0,"champ":"Caitlyn","cs":227,"d":4,"dmg":null,"gold":10142,"k":1,"name":"BL Willyyy","pid":null,"role":"ADC","team":"red"},{"a":1,"champ":"Gragas","cs":27,"d":5,"dmg":null,"gold":5785,"k":0,"name":"Guytan","pid":null,"role":"SUPPORT","team":"red"}],"side":"blue","win":true},{"bans":{"blue":[],"red":[]},"dur":1631,"n":2,"p":[{"a":23,"champ":"Rakan","cs":35,"d":3,"dmg":null,"gold":8537,"k":1,"name":"COCOTRAK","pid":"vqd4quk25vwo","role":"SUPPORT","team":"blue"},{"a":6,"champ":"Gnar","cs":217,"d":3,"dmg":null,"gold":10349,"k":3,"name":"Scooby","pid":"scooby0001","role":"TOP","team":"blue"},{"a":17,"champ":"Wukong","cs":209,"d":1,"dmg":null,"gold":14036,"k":8,"name":"Onii","pid":"onii000002","role":"JUNGLE","team":"blue"},{"a":20,"champ":"Orianna","cs":196,"d":1,"dmg":null,"gold":10326,"k":2,"name":"rubēn","pid":"ruben00003","role":"MID","team":"blue"},{"a":10,"champ":"Yunara","cs":277,"d":0,"dmg":null,"gold":19061,"k":16,"name":"WashedUp Damoss","pid":"damoss0004","role":"ADC","team":"blue"},{"a":2,"champ":"Rammus","cs":202,"d":2,"dmg":null,"gold":8867,"k":2,"name":"MCU Arak","pid":null,"role":"TOP","team":"red"},{"a":5,"champ":"Leona","cs":174,"d":7,"dmg":null,"gold":9206,"k":1,"name":"AH Citronn","pid":null,"role":"JUNGLE","team":"red"},{"a":3,"champ":"Viktor","cs":210,"d":6,"dmg":null,"gold":8431,"k":0,"name":"thinkov","pid":null,"role":"MID","team":"red"},{"a":0,"champ":"Kai'Sa","cs":239,"d":7,"dmg":null,"gold":12820,"k":5,"name":"BL Willyyy","pid":null,"role":"ADC","team":"red"},{"a":5,"champ":"Nautilus","cs":34,"d":8,"dmg":null,"gold":6527,"k":0,"name":"Guytan","pid":null,"role":"SUPPORT","team":"red"}],"side":"blue","win":true},{"bans":{"blue":[],"red":[]},"dur":2411,"n":3,"p":[{"a":21,"champ":"Nautilus","cs":31,"d":12,"dmg":null,"gold":11276,"k":3,"name":"COCOTRAK","pid":"vqd4quk25vwo","role":"SUPPORT","team":"blue"},{"a":12,"champ":"Ambessa","cs":354,"d":3,"dmg":null,"gold":19476,"k":9,"name":"Scooby","pid":"scooby0001","role":"TOP","team":"blue"},{"a":17,"champ":"Qiyana","cs":291,"d":7,"dmg":null,"gold":16091,"k":4,"name":"Onii","pid":"onii000002","role":"JUNGLE","team":"blue"},{"a":8,"champ":"Aurora","cs":283,"d":6,"dmg":null,"gold":14662,"k":7,"name":"rubēn","pid":"ruben00003","role":"MID","team":"blue"},{"a":11,"champ":"Kai'Sa","cs":317,"d":11,"dmg":null,"gold":17147,"k":4,"name":"WashedUp Damoss","pid":"damoss0004","role":"ADC","team":"blue"},{"a":13,"champ":"Renekton","cs":301,"d":4,"dmg":null,"gold":16855,"k":7,"name":"MCU Arak","pid":null,"role":"TOP","team":"red"},{"a":23,"champ":"Kha'Zix","cs":187,"d":5,"dmg":null,"gold":15190,"k":7,"name":"AH Citronn","pid":null,"role":"JUNGLE","team":"red"},{"a":14,"champ":"Fiora","cs":290,"d":4,"dmg":null,"gold":17702,"k":10,"name":"thinkov","pid":null,"role":"MID","team":"red"},{"a":13,"champ":"Miss Fortune","cs":353,"d":6,"dmg":null,"gold":21610,"k":15,"name":"BL Willyyy","pid":null,"role":"ADC","team":"red"},{"a":34,"champ":"Tahm Kench","cs":27,"d":8,"dmg":null,"gold":11661,"k":0,"name":"Guytan","pid":null,"role":"SUPPORT","team":"red"}],"side":"blue","win":false}],"notes":"","opp":"MCU","shots":[],"type":"SCRIM"},{"id":"50pt7i8gwr8o","date":"2026-09-29","format":"BO3","games":[{"bans":{"blue":[],"red":[]},"dur":1987,"n":1,"p":[{"a":10,"champ":"Ambessa","cs":221,"d":6,"dmg":null,"gold":12974,"k":7,"name":"Scooby","pid":"scooby0001","role":"TOP","team":"blue"},{"a":17,"champ":"Sejuani","cs":241,"d":5,"dmg":null,"gold":13635,"k":6,"name":"Onii","pid":"onii000002","role":"JUNGLE","team":"blue"},{"a":6,"champ":"Sylas","cs":222,"d":6,"dmg":null,"gold":14896,"k":13,"name":"rubēn","pid":"ruben00003","role":"MID","team":"blue"},{"a":11,"champ":"Ashe","cs":254,"d":7,"dmg":null,"gold":12943,"k":4,"name":"WashedUp Damoss","pid":"damoss0004","role":"ADC","team":"blue"},{"a":16,"champ":"Braum","cs":36,"d":6,"dmg":null,"gold":8601,"k":0,"name":"COCOTRAK","pid":"vqd4quk25vwo","role":"SUPPORT","team":"blue"},{"a":12,"champ":"Vi","cs":299,"d":5,"dmg":null,"gold":14215,"k":3,"name":"Fly","pid":null,"role":"TOP","team":"red"},{"a":13,"champ":"Kha'Zix","cs":227,"d":5,"dmg":null,"gold":14284,"k":7,"name":"AME Karbbone","pid":null,"role":"JUNGLE","team":"red"},{"a":17,"champ":"Zed","cs":233,"d":6,"dmg":null,"gold":12474,"k":2,"name":"Soła","pid":null,"role":"MID","team":"red"},{"a":7,"champ":"Kai'Sa","cs":303,"d":3,"dmg":null,"gold":22983,"k":17,"name":"Ward","pid":null,"role":"ADC","team":"red"},{"a":15,"champ":"Taric","cs":29,"d":11,"dmg":null,"gold":9300,"k":1,"name":"Ingra","pid":null,"role":"SUPPORT","team":"red"}],"side":"blue","win":false},{"bans":{"blue":[],"red":[]},"dur":1672,"n":2,"p":[{"a":9,"champ":"Gwen","cs":216,"d":1,"dmg":null,"gold":12274,"k":5,"name":"Scooby","pid":"scooby0001","role":"TOP","team":"blue"},{"a":7,"champ":"Viego","cs":225,"d":2,"dmg":null,"gold":15108,"k":12,"name":"Onii","pid":"onii000002","role":"JUNGLE","team":"blue"},{"a":12,"champ":"Ahri","cs":224,"d":2,"dmg":null,"gold":13747,"k":12,"name":"rubēn","pid":"ruben00003","role":"MID","team":"blue"},{"a":16,"champ":"Jhin","cs":226,"d":0,"dmg":null,"gold":13403,"k":3,"name":"WashedUp Damoss","pid":"damoss0004","role":"ADC","team":"blue"},{"a":20,"champ":"Leona","cs":33,"d":3,"dmg":null,"gold":8220,"k":0,"name":"COCOTRAK","pid":"vqd4quk25vwo","role":"SUPPORT","team":"blue"},{"a":2,"champ":"Rek'Sai","cs":217,"d":5,"dmg":null,"gold":10868,"k":3,"name":"Fly","pid":null,"role":"TOP","team":"red"},{"a":3,"champ":"Wukong","cs":160,"d":6,"dmg":null,"gold":10027,"k":2,"name":"AME Karbbone","pid":null,"role":"JUNGLE","team":"red"},{"a":0,"champ":"Evelynn","cs":208,"d":5,"dmg":null,"gold":8771,"k":2,"name":"Soła","pid":null,"role":"MID","team":"red"},{"a":3,"champ":"Caitlyn","cs":238,"d":8,"dmg":null,"gold":10463,"k":1,"name":"Ward","pid":null,"role":"ADC","team":"red"},{"a":2,"champ":"Pumpkin Head","cs":24,"d":8,"dmg":null,"gold":6559,"k":0,"name":"Ingra","pid":null,"role":"SUPPORT","team":"red"}],"side":"blue","win":true},{"bans":{"blue":[],"red":[]},"dur":2517,"n":3,"p":[{"a":11,"champ":"Jax","cs":296,"d":2,"dmg":null,"gold":15499,"k":6,"name":"Scooby","pid":"scooby0001","role":"TOP","team":"blue"},{"a":13,"champ":"Qiyana","cs":339,"d":1,"dmg":null,"gold":20145,"k":8,"name":"Onii","pid":"onii000002","role":"JUNGLE","team":"blue"},{"a":14,"champ":"Viktor","cs":290,"d":2,"dmg":null,"gold":17861,"k":10,"name":"rubēn","pid":"ruben00003","role":"MID","team":"blue"},{"a":13,"champ":"Tristana","cs":313,"d":6,"dmg":null,"gold":20295,"k":8,"name":"WashedUp Damoss","pid":"damoss0004","role":"ADC","team":"blue"},{"a":18,"champ":"Thresh","cs":40,"d":13,"dmg":null,"gold":11400,"k":2,"name":"COCOTRAK","pid":"vqd4quk25vwo","role":"SUPPORT","team":"blue"},{"a":9,"champ":"Gragas","cs":310,"d":5,"dmg":null,"gold":14182,"k":2,"name":"Fly","pid":null,"role":"TOP","team":"red"},{"a":10,"champ":"Viego","cs":246,"d":7,"dmg":null,"gold":14894,"k":4,"name":"AME Karbbone","pid":null,"role":"JUNGLE","team":"red"},{"a":14,"champ":"Akali","cs":272,"d":9,"dmg":null,"gold":14001,"k":4,"name":"Soła","pid":null,"role":"MID","team":"red"},{"a":9,"champ":"Kai'Sa","cs":379,"d":6,"dmg":null,"gold":22898,"k":12,"name":"Ward","pid":null,"role":"ADC","team":"red"},{"a":18,"champ":"Karma","cs":54,"d":7,"dmg":null,"gold":11452,"k":2,"name":"Ingra","pid":null,"role":"SUPPORT","team":"red"}],"side":"blue","win":true}],"notes":"","opp":"MIX","shots":[],"type":"SCRIM"},{"id":"jqsnx1ex36nc","date":"2026-09-22","format":"BO3","games":[{"bans":{"blue":[],"red":[]},"dur":1544,"n":1,"p":[{"a":12,"champ":"Zaahen","cs":193,"d":2,"dmg":null,"gold":14008,"k":10,"name":"Scooby","pid":"scooby0001","role":"TOP","team":"blue"},{"a":13,"champ":"Viego","cs":217,"d":5,"dmg":null,"gold":13251,"k":5,"name":"Onii","pid":"onii000002","role":"JUNGLE","team":"blue"},{"a":7,"champ":"Akali","cs":161,"d":3,"dmg":null,"gold":9437,"k":3,"name":"rubēn","pid":"ruben00003","role":"MID","team":"blue"},{"a":13,"champ":"Yunara","cs":212,"d":5,"dmg":null,"gold":16340,"k":13,"name":"WashedUp Damoss","pid":"damoss0004","role":"ADC","team":"blue"},{"a":23,"champ":"Thresh","cs":30,"d":5,"dmg":null,"gold":8489,"k":1,"name":"COCOTRAK","pid":"vqd4quk25vwo","role":"SUPPORT","team":"blue"},{"a":5,"champ":"Fiora","cs":151,"d":7,"dmg":null,"gold":12215,"k":8,"name":"AUDRIC","pid":null,"role":"TOP","team":"red"},{"a":6,"champ":"Kha'Zix","cs":124,"d":7,"dmg":null,"gold":9075,"k":5,"name":"EXPIATION","pid":null,"role":"JUNGLE","team":"red"},{"a":11,"champ":"Syndra","cs":187,"d":5,"dmg":null,"gold":9361,"k":3,"name":"LarryLeMalicieux","pid":null,"role":"MID","team":"red"},{"a":7,"champ":"Jhin","cs":215,"d":5,"dmg":null,"gold":10296,"k":4,"name":"Flying High","pid":null,"role":"ADC","team":"red"},{"a":11,"champ":"Nautilus","cs":26,"d":8,"dmg":null,"gold":6261,"k":0,"name":"CRUNK","pid":null,"role":"SUPPORT","team":"red"}],"side":"blue","win":true},{"bans":{"blue":[],"red":[]},"dur":1780,"n":2,"p":[{"a":6,"champ":"Olaf","cs":283,"d":2,"dmg":null,"gold":13650,"k":4,"name":"Scooby","pid":"scooby0001","role":"TOP","team":"blue"},{"a":8,"champ":"Qiyana","cs":243,"d":2,"dmg":null,"gold":14423,"k":7,"name":"Onii","pid":"onii000002","role":"JUNGLE","team":"blue"},{"a":13,"champ":"Taliyah","cs":232,"d":0,"dmg":null,"gold":10867,"k":2,"name":"rubēn","pid":"ruben00003","role":"MID","team":"blue"},{"a":7,"champ":"Kai'Sa","cs":262,"d":2,"dmg":null,"gold":15100,"k":6,"name":"WashedUp Damoss","pid":"damoss0004","role":"ADC","team":"blue"},{"a":18,"champ":"Leona","cs":27,"d":2,"dmg":null,"gold":9266,"k":2,"name":"COCOTRAK","pid":"vqd4quk25vwo","role":"SUPPORT","team":"blue"},{"a":0,"champ":"Mordekaiser","cs":240,"d":3,"dmg":null,"gold":9988,"k":2,"name":"AUDRIC","pid":null,"role":"TOP","team":"red"},{"a":5,"champ":"Vi","cs":179,"d":4,"dmg":null,"gold":9918,"k":1,"name":"EXPIATION","pid":null,"role":"JUNGLE","team":"red"},{"a":3,"champ":"Vex","cs":241,"d":4,"dmg":null,"gold":9971,"k":1,"name":"LarryLeMalicieux","pid":null,"role":"MID","team":"red"},{"a":2,"champ":"Kai'Sa","cs":277,"d":5,"dmg":null,"gold":13448,"k":4,"name":"Flying High","pid":null,"role":"ADC","team":"red"},{"a":5,"champ":"Kog'Maw","cs":26,"d":5,"dmg":null,"gold":6703,"k":0,"name":"CRUNK","pid":null,"role":"SUPPORT","team":"red"}],"side":"blue","win":true},{"bans":{"blue":[],"red":[]},"dur":2294,"n":3,"p":[{"a":5,"champ":"Rumble","cs":296,"d":6,"dmg":null,"gold":15311,"k":6,"name":"Scooby","pid":"scooby0001","role":"TOP","team":"blue"},{"a":4,"champ":"Wukong","cs":260,"d":7,"dmg":null,"gold":15131,"k":5,"name":"Onii","pid":"onii000002","role":"JUNGLE","team":"blue"},{"a":5,"champ":"Ahri","cs":249,"d":5,"dmg":null,"gold":12447,"k":4,"name":"rubēn","pid":"ruben00003","role":"MID","team":"blue"},{"a":11,"champ":"Jinx","cs":354,"d":6,"dmg":null,"gold":16568,"k":1,"name":"WashedUp Damoss","pid":"damoss0004","role":"ADC","team":"blue"},{"a":9,"champ":"Lulu","cs":35,"d":5,"dmg":null,"gold":9148,"k":0,"name":"COCOTRAK","pid":"vqd4quk25vwo","role":"SUPPORT","team":"blue"},{"a":14,"champ":"Dr. Mundo","cs":211,"d":2,"dmg":null,"gold":14523,"k":8,"name":"AUDRIC","pid":null,"role":"TOP","team":"red"},{"a":18,"champ":"Xin Zhao","cs":191,"d":4,"dmg":null,"gold":15962,"k":9,"name":"EXPIATION","pid":null,"role":"JUNGLE","team":"red"},{"a":8,"champ":"Malzahar","cs":298,"d":5,"dmg":null,"gold":14830,"k":4,"name":"LarryLeMalicieux","pid":null,"role":"MID","team":"red"},{"a":10,"champ":"Miss Fortune","cs":369,"d":2,"dmg":null,"gold":19102,"k":8,"name":"Flying High","pid":null,"role":"ADC","team":"red"},{"a":25,"champ":"Nautilus","cs":29,"d":3,"dmg":null,"gold":11069,"k":0,"name":"CRUNK","pid":null,"role":"SUPPORT","team":"red"}],"side":"blue","win":false}],"notes":"","opp":"MIX","shots":[],"type":"SCRIM"}]};</script><script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4);
+const ROLES=['TOP','JUNGLE','MID','ADC','SUPPORT'],RL={TOP:'Top',JUNGLE:'Jungle',MID:'Mid',ADC:'ADC',SUPPORT:'Suporte'};
+const FM={BO1:1,BO2:2,BO3:3,BO5:5};
+const S={players:[],series:[],team:'A minha equipa',tab:'res',ready:false,can:true,db:null,sample:null,assets:null,dl:null,draft:null,msg:'',armed:null,
+ pf:{pid:null,type:'ALL',sort:'g',dir:-1,open:null,from:'',to:''},rf:{type:'',opp:'',from:'',to:''}};
+const ALIAS={monkeyking:'Wukong',nunuwillump:'Nunu & Willump',nunu:'Nunu & Willump',renata:'Renata Glasc',velkoz:"Vel'Koz",khazix:"Kha'Zix",chogath:"Cho'Gath",kogmaw:"Kog'Maw",reksai:"Rek'Sai",kaisa:"Kai'Sa",leblanc:'LeBlanc',drmundo:'Dr. Mundo',jarvaniv:'Jarvan IV',leesin:'Lee Sin',masteryi:'Master Yi',missfortune:'Miss Fortune',tahmkench:'Tahm Kench',twistedfate:'Twisted Fate',xinzhao:'Xin Zhao',aurelionsol:'Aurelion Sol',belveth:"Bel'Veth",ksante:"K'Sante"};
+const norm=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+const CH=["Aatrox", "Ahri", "Akali", "Akshan", "Alistar", "Ambessa", "Amumu", "Anivia", "Annie", "Aphelios", "Ashe", "Aurelion Sol", "Aurora", "Azir", "Bard", "Bel'Veth", "Blitzcrank", "Brand", "Braum", "Briar", "Caitlyn", "Camille", "Cassiopeia", "Cho'Gath", "Corki", "Darius", "Diana", "Dr. Mundo", "Draven", "Ekko", "Elise", "Evelynn", "Ezreal", "Fiddlesticks", "Fiora", "Fizz", "Galio", "Gangplank", "Garen", "Gnar", "Gragas", "Graves", "Gwen", "Hecarim", "Heimerdinger", "Hwei", "Illaoi", "Irelia", "Ivern", "Janna", "Jarvan IV", "Jax", "Jayce", "Jhin", "Jinx", "K'Sante", "Kai'Sa", "Kalista", "Karma", "Karthus", "Kassadin", "Katarina", "Kayle", "Kayn", "Kennen", "Kha'Zix", "Kindred", "Kled", "Kog'Maw", "LeBlanc", "Lee Sin", "Leona", "Lillia", "Lissandra", "Lucian", "Lulu", "Lux", "Malphite", "Malzahar", "Maokai", "Master Yi", "Mel", "Milio", "Miss Fortune", "Mordekaiser", "Morgana", "Naafiri", "Nami", "Nasus", "Nautilus", "Neeko", "Nidalee", "Nilah", "Nocturne", "Nunu & Willump", "Olaf", "Orianna", "Ornn", "Pantheon", "Poppy", "Pyke", "Qiyana", "Quinn", "Rakan", "Rammus", "Rek'Sai", "Rell", "Renata Glasc", "Renekton", "Rengar", "Riven", "Rumble", "Ryze", "Samira", "Sejuani", "Senna", "Seraphine", "Sett", "Shaco", "Shen", "Shyvana", "Singed", "Sion", "Sivir", "Skarner", "Smolder", "Sona", "Soraka", "Swain", "Sylas", "Syndra", "Tahm Kench", "Taliyah", "Talon", "Taric", "Teemo", "Thresh", "Tristana", "Trundle", "Tryndamere", "Twisted Fate", "Twitch", "Udyr", "Urgot", "Varus", "Vayne", "Veigar", "Vel'Koz", "Vex", "Vi", "Viego", "Viktor", "Vladimir", "Volibear", "Warwick", "Wukong", "Xayah", "Xerath", "Xin Zhao", "Yasuo", "Yone", "Yorick", "Yunara", "Yuumi", "Zaahen", "Zac", "Zed", "Zeri", "Ziggs", "Zilean", "Zoe", "Zyra"];
+const CM=Object.fromEntries(CH.map(x=>[norm(x),x]));
+const CHOPTS=CH.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('');
+const fixChamp=c=>{const t=String(c||'').trim(),k=norm(t);if(!k)return '';if(ALIAS[k])return ALIAS[k];if(CM[k])return CM[k];let b=null,bs=0;for(const x of CH){const q=norm(x),sc=1-lev(k,q)/Math.max(k.length,q.length);if(sc>bs){bs=sc;b=x}}return bs>=.8?b:t};
+function lev(a,b){const m=[...Array(b.length+1).keys()];for(let i=1;i<=a.length;i++){let p=m[0];m[0]=i;for(let j=1;j<=b.length;j++){const t=m[j];m[j]=Math.min(m[j]+1,m[j-1]+1,p+(a[i-1]===b[j-1]?0:1));p=t}}return m[b.length]}
+function matchPlayer(name){const n=norm(name);if(!n)return null;let best=null,bs=0;S.players.forEach(p=>[p.name,...(p.names||[])].forEach(x=>{const k=norm(x);if(!k)return;const sc=1-lev(n,k)/Math.max(n.length,k.length);if(sc>bs){bs=sc;best=p.id}}));return bs>=.75?best:null}
+const fmtDur=s=>s==null||s===''?'':Math.floor(s/60)+':'+String(Math.round(s%60)).padStart(2,'0');
+const parseDur=t=>{const m=String(t).match(/^(\d+):(\d{1,2})$/);return m?+m[1]*60+ +m[2]:(+t||null)};
+const col=c=>'hsl('+([...c].reduce((a,x)=>a+x.charCodeAt(0)*7,0)%360)+',55%,42%)';
+const chip=c=>`<span class="ch" style="background:${col(c||'?')}">${esc((c||'?')[0])}</span>${esc(c||'—')}`;
+const pname=id=>S.players.find(p=>p.id===id)?.name||'—';
+const sres=s=>[s.games.filter(g=>g.win).length,s.games.filter(g=>!g.win).length];
+const pct=(w,n)=>n?Math.round(100*w/n)+'%':'—';
+const kdaF=(k,d,a)=>((k+a)/Math.max(1,d)).toFixed(2);
+
+const FR={"Resultados": "Résultats", "Jogadores": "Joueurs", "Equipa / Adversários": "Équipe / Adversaires", "Definições": "Paramètres", "Novo resultado": "Nouveau résultat", "Winrate global": "Winrate global", "Oficiais": "Officiels", "Últimos 10 jogos": "10 dernières parties", "Todos os tipos": "Tous les types", "Todos os adversários": "Tous les adversaires", "Oficial": "Officiel", "Ainda não há séries. Carrega em “Novo resultado”.": "Aucune série pour l’instant. Clique sur « Nouveau résultat ».", "Maps ganhos / perdidos": "Maps gagnées / perdues", "Jogos": "Parties", "Jogo ": "Partie ", "＋ Jogo": "＋ Partie", "Vitória": "Victoire", "Derrota": "Défaite", "Equipa": "Équipe", "Jogador": "Joueur", "Campeão": "Champion", "Campeões": "Champions", "Ouro": "Or", "Dano": "Dégâts", "Nós": "Nous", "Eles": "Eux", "Editar": "Modifier", "Apagar": "Supprimer", "Confirmar apagar": "Confirmer la suppression", "Plantel": "Effectif", "(clica num jogador para ver os campeões)": "(clique sur un joueur pour voir ses champions)", "Mais jogado": "Le plus joué", "Suplente": "Remplaçant", "Suporte": "Support", "Todos": "Tous", "Só scrims": "Scrims seulement", "Só oficiais": "Officiels seulement", "Limpar período": "Effacer la période", "KDA médio": "KDA moyen", "Campeão mais jogado": "Champion le plus joué", "Melhor campeão (≥3 jogos)": "Meilleur champion (≥3 parties)", "Último jogo": "Dernière partie", "amostra pequena": "petit échantillon", "★ forte": "★ fort", "Data": "Date", "Adversário": "Adversaire", "Adversários": "Adversaires", "Tipo": "Type", "Res.": "Rés.", "Sem jogos neste filtro.": "Aucune partie avec ce filtre.", "As estatísticas são calculadas automaticamente a partir de todas as séries guardadas. Cada nova scrim entra aqui assim que a guardas.": "Les statistiques sont calculées automatiquement à partir de toutes les séries enregistrées. Chaque nouveau scrim apparaît ici dès que tu l’enregistres.", "Winrate (jogos)": "Winrate (parties)", "Sem dados.": "Aucune donnée.", "Mais banidos por nós": "Les plus bannis par nous", "Mais banidos contra nós": "Les plus bannis contre nous", "Picks mais jogados": "Picks les plus joués", "Nome": "Nom", "Nomes de invocador / alts (separados por vírgula)": "Pseudos d’invocateur / alts (séparés par des virgules)", "Adicionar jogador": "Ajouter un joueur", "Dados": "Données", "Exportar JSON": "Exporter JSON", "Importar backup": "Importer une sauvegarde", "Confirmar": "Confirmer", "Novo jogador": "Nouveau joueur", "Arrasta capturas de ecrã para aqui, cola com Ctrl+V ou": "Glisse des captures d’écran ici, colle avec Ctrl+V ou", "escolhe ficheiros": "choisis des fichiers", "Um resumo da série ou uma imagem por jogo.": "Un résumé de la série ou une image par partie.", "imagem(ns):": "image(s) :", "colada": "collée", "Nomes de invocador da nossa equipa (separados por vírgula). A IA usa-os para saber qual é a nossa equipa.": "Pseudos d’invocateur de notre équipe (séparés par des virgules). L’IA les utilise pour savoir quelle est notre équipe.", "Analisar com IA": "Analyser avec l’IA", "A ler as imagens… (pode demorar até 1 min)": "Lecture des images… (jusqu’à 1 min)", "Preencher manualmente": "Remplir manuellement", "Cancelar": "Annuler", "Revisão · resultado": "Révision · résultat", "Campos a amarelo têm baixa confiança ou estão por preencher. Corrige o que for preciso.": "Les champs en jaune ont une faible confiance ou sont vides. Corrige si nécessaire.", "Nossa equipa": "Notre équipe", "Duração": "Durée", "Remover jogo": "Supprimer la partie", "Invocador": "Invocateur", "— ignorar —": "— ignorer —", "Confirmar e guardar": "Confirmer et enregistrer", "A guardar…": "Enregistrement…", "Equipa adversária": "Équipe adverse", "Este jogo parece já existir (mesma data, campeões e duração). Carrega outra vez em “Guardar” para guardar mesmo assim.": "Cette partie semble déjà exister (même date, champions et durée). Clique à nouveau sur « Enregistrer » pour l’enregistrer quand même.", "Este jogo parece já existir. Carrega outra vez em “Confirmar e guardar” para guardar mesmo assim.": "Cette partie semble déjà exister. Clique à nouveau sur « Confirmer et enregistrer » pour l’enregistrer quand même.", "A app não encontrou os vossos nomes de invocador nesta imagem, por isso não sabe qual das duas equipas é a vossa. Escolhe abaixo em “Nossa equipa” se vocês são Blue ou Red, e depois escolhe o jogador de cada linha da vossa equipa.": "L’app n’a pas trouvé vos pseudos d’invocateur sur cette image, donc elle ne sait pas laquelle des deux équipes est la vôtre. Choisis ci-dessous « Notre équipe » (Blue ou Red), puis choisis le joueur de chaque ligne de votre équipe.", "Vencedor não identificado, confirma o resultado.": "Vainqueur non identifié, confirme le résultat.", "A ligar à base de dados…": "Connexion à la base de données…", "A carregar…": "Chargement…", "A base de dados partilhada não está disponível nesta vista. Abre o link dentro do Claude (claude.ai ou app), com sessão iniciada, e aceita as permissões se aparecerem.": "La base de données partagée n’est pas disponible dans cette vue. Ouvre le lien dans Claude (claude.ai ou l’app), connecté, et accepte les autorisations si elles apparaissent.", "Só tens permissão de leitura. Pede ao dono para te dar acesso de Contribuidor.": "Tu as seulement un accès en lecture. Demande au propriétaire de te donner l’accès Contributeur.", "Escreve o nome da equipa adversária (campo no topo da página).": "Écris le nom de l’équipe adverse (champ en haut de la page).", "Adiciona pelo menos um jogo.": "Ajoute au moins une partie.", "Não consegui guardar": "Impossible d’enregistrer", "Aceita o pedido de permissões do Claude para poder guardar.": "Accepte la demande d’autorisations de Claude pour pouvoir enregistrer.", "A guardar a série…": "Enregistrement de la série…", "Guardado ✓": "Enregistré ✓", "Estatísticas atualizadas": "Statistiques mises à jour", "Sem jogador associado": "Aucun joueur associé", "nenhum jogador": "aucun joueur", "Erro": "Erreur", "Não consegui ler as imagens. Tenta uma captura mais nítida ou preenche manualmente.": "Impossible de lire les images. Essaie une capture plus nette ou remplis manuellement.", "Não consegui ler nenhum jogo. Tenta uma captura mais nítida ou preenche manualmente.": "Impossible de lire une partie. Essaie une capture plus nette ou remplis manuellement.", "Sem permissão para apagar.": "Pas d’autorisation pour supprimer.", "Sem permissão para editar.": "Pas d’autorisation pour modifier.", "Backup importado.": "Sauvegarde importée.","✎ Outro…":"✎ Autre…","Atualizado a":"Mis à jour le","1. Exportar site (index.html, só uma vez)":"1. Exporter le site (index.html, une seule fois)","2. Exportar dados (data.json, após cada scrim)":"2. Exporter les données (data.json, après chaque scrim)","Ainda não há séries.":"Aucune série pour l’instant."};
+const FK=Object.keys(FR).sort((a,b)=>b.length-a.length);
+const trs=t=>{if(S.lang!=='fr'||!t)return t;const k=t.trim();if(FR[k])return t.replace(k,FR[k]);let o=t;for(const key of FK)if(key.length>=5&&o.includes(key))o=o.split(key).join(FR[key]);return o};
+function translateDom(){if(S.lang!=='fr')return;const w=document.createTreeWalker($('#app'),NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){const v=trs(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v}document.querySelectorAll('#app [placeholder],#app [title]').forEach(e=>['placeholder','title'].forEach(a=>{if(e.hasAttribute(a))e.setAttribute(a,trs(e.getAttribute(a)))}))}
+const PROMPT0=`És um extrator de dados de capturas de ecrã de fim de partida de League of Legends. As imagens podem ser um resumo de série completa ou um ecrã por jogo. Agrupa por jogo (gameNumber crescente) e não dupliques o mesmo jogo.
+Responde APENAS com JSON estrito (sem markdown, sem texto extra) neste schema:
+{"games":[{"gameNumber":1,"winner":"blue|red|null","durationSec":number|null,"bans":{"blue":["Champion"],"red":["Champion"]},"players":[{"team":"blue|red","summoner":"string","champion":"nome inglês oficial da Data Dragon, ex. Wukong","role":"TOP|JUNGLE|MID|ADC|SUPPORT|null","kills":number|null,"deaths":number|null,"assists":number|null,"cs":number|null,"gold":number|null,"damage":number|null,"conf":{"summoner":0-1,"champion":0-1,"kills":0-1,"deaths":0-1,"assists":0-1,"cs":0-1,"gold":0-1,"damage":0-1}}],"conf":{"winner":0-1,"duration":0-1}}],"warnings":["string"]}
+Regras: 10 jogadores por jogo (5 por equipa, ordem Top, Jungle, Mid, ADC, Support quando possível). A equipa vencedora é a que tem "Vitória"/"Victory". Duração mm:ss converte para segundos. Valor ilegível ou ausente = null com confiança < 0.5. Nunca inventes valores. Confiança 0 a 1 por campo. Se um jogo for ilegível, omite-o e explica em warnings.`;
+const oursList=()=>[...new Set([...(S.ours||'').split(/[,\n]/).map(x=>x.trim()),...S.players.flatMap(p=>[p.name,...(p.names||[])])].filter(Boolean))];
+const isOurs=n=>{const k=norm(n);if(!k)return false;return oursList().some(o=>{const q=norm(o);return q&&1-lev(k,q)/Math.max(k.length,q.length)>=.75})||!!matchPlayer(n)};
+const mkPrompt=()=>PROMPT0+`
+IMPORTANTE (campeões): no ecrã de fim de partida os campeões aparecem como ÍCONES/retratos, normalmente sem texto. Tens de OLHAR para cada ícone e identificar o campeão visualmente (usa também os itens, o feitiço de invocador e o contexto). Devolve sempre o nome inglês oficial. NUNCA deixes "champion" vazio: se tiveres dúvida dá o teu melhor palpite com confiança baixa (< 0.6). Lê também os números (KDA, CS, ouro, dano) diretamente da imagem.
+EQUIPA: a NOSSA equipa é a que contém estes nomes de invocador (podem ter pequenas diferenças de leitura): ${oursList().join(', ')||'(não indicado)'}. Adiciona a cada jogo o campo "ourTeam":"blue|red" com o lado da nossa equipa. Pode ser o lado Blue ou Red, em cada jogo.
+ORDEM: dentro de cada equipa lista os 5 jogadores pela ordem Top, Jungle, Mid, ADC, Support e preenche "role" em conformidade.`;
+
+const ppid=(g,p)=>p.team!==g.side?null:(p.pid||matchPlayer(p.name));
+function stats(pid,type,from,to){const m={};S.series.forEach(s=>{if(type&&type!=='ALL'&&s.type!==type)return;if(from&&s.date<from)return;if(to&&s.date>to)return;s.games.forEach(g=>g.p.forEach(p=>{if(ppid(g,p)!==pid)return;const c=m[p.champ]||(m[p.champ]={champ:p.champ,g:0,w:0,k:0,d:0,a:0,cs:0,min:0,last:'',h:[]});c.g++;c.w+=g.win?1:0;c.k+=+p.k||0;c.d+=+p.d||0;c.a+=+p.a||0;c.cs+=+p.cs||0;c.min+=(g.dur||0)/60;if(s.date>c.last)c.last=s.date;c.h.push({s,g,p})}))});return Object.values(m).map(c=>({...c,l:c.g-c.w,wr:c.w/c.g,kda:(c.k+c.a)/Math.max(1,c.d),csm:c.min?c.cs/c.min:0}))}
+const tot=r=>r.reduce((a,c)=>({g:a.g+c.g,w:a.w+c.w,k:a.k+c.k,d:a.d+c.d,a:a.a+c.a,cs:a.cs+c.cs,min:a.min+c.min}),{g:0,w:0,k:0,d:0,a:0,cs:0,min:0});
+const games=(f=()=>true)=>[...S.series].sort((a,b)=>b.date.localeCompare(a.date)).filter(f).flatMap(s=>s.games.map(g=>({s,g})));
+
+const blank=(n)=>({n,win:true,side:'blue',dur:null,bans:{blue:[],red:[]},warn:'',p:['blue','red'].flatMap(t=>ROLES.map(r=>({team:t,name:'',champ:'',role:r,k:null,d:null,a:null,cs:null,gold:null,dmg:null,pid:null,conf:{}})))});
+const newDraft=()=>({stage:'form',type:'SCRIM',date:new Date().toISOString().slice(0,10),opp:'',format:'BO3',notes:'',games:[],files:[],busy:false,err:'',dupWarn:false});
+
+/* ---------- vista ---------- */
+function render(){try{document.body.dataset.tab=S.draft?'new':S.tab}catch(e){}
+try{renderInner();translateDom()}catch(e){console.error(e);$('#app').innerHTML='<div class="msg err">Erro ao desenhar a página: '+esc(e.message)+'</div>'}}
+function renderInner(){
+ if(!S.dbDone||(S.db&&!S.ready)){$('#app').innerHTML='A ligar à base de dados…';return}
+ const head=`<div class="row"><h1>🎮 ${esc(S.team)}</h1>${S.snap?`<span class="mu">Atualizado a ${esc(window.SNAP.at)}</span>`:''}<span style="margin-left:auto"><button class="t ${S.lang!=='fr'?'on':''}" data-act="lang" data-k="pt">PT</button> <button class="t ${S.lang==='fr'?'on':''}" data-act="lang" data-k="fr">FR</button></span></div>`;
+ if(!S.db&&!S.snap){$('#app').innerHTML=head+`<div class="msg err">A base de dados partilhada não está disponível nesta vista. Abre o link dentro do Claude (claude.ai ou app), com sessão iniciada, e aceita as permissões se aparecerem.</div>`;return}
+ let body='';
+ if(S.draft)body=S.draft.stage==='form'?vForm():vReview();
+ else body=`<nav>${[['res','Resultados'],['pl','Jogadores'],['opp','Equipa / Adversários'],...(S.snap?[]:[['set','Definições']])].map(([k,l])=>`<button class="t ${S.tab===k?'on':''}" data-act="tab" data-k="${k}">${l}</button>`).join('')}</nav>`+(S.msg?`<div class="msg">${esc(S.msg)}</div>`:'')+(S.tab==='res'?vRes():S.tab==='pl'?vPl():S.tab==='opp'?vOpp():vSet());
+ $('#app').innerHTML=head+(!S.can&&!S.snap?'<div class="msg err">Só tens permissão de leitura. Pede ao dono para te dar acesso de Contribuidor.</div>':'')+body;
+}
+function vRes(){
+ const all=games(),sc=games(x=>x.type==='SCRIM'),of=games(x=>x.type==='OFFICIAL'),w=a=>a.filter(x=>x.g.win).length,rc=a=>`<div class="mu">Maps <span class="w">${w(a)}V</span> – <span class="l">${a.length-w(a)}D</span></div>`,sr=S.series.reduce((o,x)=>{const[p,q]=sres(x);p>q?o.w++:q>p?o.l++:0;return o},{w:0,l:0});
+ const l10=all.slice(0,10).map(x=>`<span class="v" style="background:${x.g.win?'var(--g)':'var(--r)'}">${x.g.win?'V':'D'}</span>`).join('')||'<span class="mu">—</span>';
+ const f=S.rf,opps=[...new Set(S.series.map(s=>s.opp))].sort();
+ const list=[...S.series].sort((a,b)=>b.date.localeCompare(a.date)).filter(s=>(!f.type||s.type===f.type)&&(!f.opp||s.opp===f.opp)&&(!f.from||s.date>=f.from)&&(!f.to||s.date<=f.to));
+ return `${S.snap?'':`<button class="p big" data-act="new" ${S.can?'':'disabled'}>＋ Novo resultado</button>`}
+ <div class="grid" style="margin-top:10px">${[['Winrate global',pct(w(all),all.length),rc(all)],['Scrims',pct(w(sc),sc.length),rc(sc)],['Oficiais',pct(w(of),of.length),rc(of)]].map(([a,b,c])=>`<div class="cd"><div class="mu">${a}</div><b style="font-size:20px">${b}</b>${c}</div>`).join('')}<div class="cd"><div class="mu">Maps ganhos / perdidos</div><b style="font-size:20px"><span class="w">${w(all)}</span> – <span class="l">${all.length-w(all)}</span></b><div class="bar" style="margin:6px 0;background:var(--r)"><i style="width:${all.length?100*w(all)/all.length:0}%"></i></div><div class="mu">Séries <span class="w">${sr.w}V</span> – <span class="l">${sr.l}D</span></div></div><div class="cd"><div class="mu">Últimos 10 jogos</div>${l10}</div></div>
+ <div class="row"><select data-rf="type"><option value="">Todos os tipos</option><option value="SCRIM" ${f.type==='SCRIM'?'selected':''}>Scrim</option><option value="OFFICIAL" ${f.type==='OFFICIAL'?'selected':''}>Oficial</option></select>
+ <select data-rf="opp"><option value="">Todos os adversários</option>${opps.map(o=>`<option ${f.opp===o?'selected':''}>${esc(o)}</option>`).join('')}</select>
+ <input type="date" data-rf="from" value="${f.from}"><input type="date" data-rf="to" value="${f.to}"></div>
+ ${list.map(vSeries).join('')||`<p class="mu">Ainda não há séries.${S.snap?'':' Carrega em “Novo resultado”.'}</p>`}`;
+}
+function vSeries(s){
+ const [w,l]=sres(s),win=w>l,tie=w===l;
+ return `<details class="cd ty-${s.type==='OFFICIAL'?'o':'s'} r-${tie?'t':win?'w':'l'}"><summary class="row"><b>${s.date}</b><span>vs ${esc(s.opp)}</span><span class="b ${s.type==='OFFICIAL'?'to':'ts'}">${s.type==='OFFICIAL'?'Oficial':'Scrim'}</span><span class="b">${s.format}</span><b class="${tie?'mu':win?'w':'l'}" style="margin-left:auto">${w}-${l} ${tie?'':win?'✅':'❌'}</b></summary>
+ ${s.games.map(g=>`<h2>Jogo ${g.n} · <span class="${g.win?'w':'l'}">${g.win?'Vitória':'Derrota'}</span> · ${g.side==='blue'?'Blue':'Red'} · ${fmtDur(g.dur)||'—'}</h2><div class="sc"><table><tr><th>Equipa</th><th>Jogador</th><th>Campeão</th><th>K/D/A</th><th>CS</th><th>Ouro</th><th>Dano</th></tr>${g.p.map(p=>`<tr class="${p.team}"><td>${p.team===g.side?'Nós':'Eles'}</td><td>${esc(ppid(g,p)?pname(ppid(g,p)):p.name)}</td><td>${chip(p.champ)}</td><td>${p.k??'-'}/${p.d??'-'}/${p.a??'-'}</td><td>${p.cs??'-'}</td><td>${p.gold??'-'}</td><td>${p.dmg??'-'}</td></tr>`).join('')}</table></div>`).join('')}
+ <div class="row" style="margin-top:8px">${(s.shots||[]).map(id=>`<a href="/_blob/${id}" target="_blank"><img src="/_blob/${id}" height="48" style="border-radius:6px"></a>`).join('')}
+ ${S.can?`<button data-act="edit" data-id="${s.id}">Editar</button><button data-act="del" data-id="${s.id}">${S.armed===s.id?'Confirmar apagar':'Apagar'}</button>`:''}</div></details>`;
+}
+function vPl(){
+ const ps=[...S.players].sort((a,b)=>ROLES.indexOf(a.role)-ROLES.indexOf(b.role));
+ if(!ps.length)return '<p class="mu">Adiciona primeiro os jogadores em Definições.</p>';
+ const f=S.pf;if(!ps.find(p=>p.id===f.pid))f.pid=ps[0].id;
+ const info=ps.map(p=>{const r=stats(p.id,f.type,f.from,f.to),t=tot(r);return{p,r,t,most:[...r].sort((a,b)=>b.g-a.g)[0]}});
+ const cur=info.find(x=>x.p.id===f.pid),rows=cur.r,tg=cur.t;
+ const best=[...rows].filter(c=>c.g>=3).sort((a,b)=>b.wr-a.wr||b.g-a.g)[0];
+ rows.sort((a,b)=>(typeof a[f.sort]==='string'?a[f.sort].localeCompare(b[f.sort]):a[f.sort]-b[f.sort])*f.dir);
+ const th=(k,l)=>`<th class="s" data-act="sort" data-k="${k}">${l}${f.sort===k?(f.dir<0?' ▼':' ▲'):''}</th>`;
+ const kd=t=>t.g?`${(t.k/t.g).toFixed(1)}/${(t.d/t.g).toFixed(1)}/${(t.a/t.g).toFixed(1)} <b>${kdaF(t.k,t.d,t.a)}</b>`:'—';
+ return `<div class="cd sc pa"><b>Plantel</b> <span class="mu">(clica num jogador para ver os campeões)</span><table><tr><th>Jogador</th><th>Role</th><th>Jogos</th><th>Winrate</th><th>KDA</th><th>CS/min</th><th>Mais jogado</th></tr>
+ ${info.map(x=>`<tr data-act="pick" data-id="${x.p.id}" style="cursor:pointer;${x.p.id===f.pid?'background:#7c6cf622':''}"><td><b>${esc(x.p.name)}</b></td><td>${RL[x.p.role]||'Suplente'}</td><td>${x.t.g}</td><td>${pct(x.t.w,x.t.g)}</td><td>${kd(x.t)}</td><td>${x.t.min?(x.t.cs/x.t.min).toFixed(1):'—'}</td><td>${x.most?chip(x.most.champ)+' ('+x.most.g+')':'—'}</td></tr>`).join('')}</table></div>
+ <div class="row">${ps.map(p=>`<button class="t ${p.id===f.pid?'on':''}" data-act="pick" data-id="${p.id}">${esc(p.name)} <span class="mu">${RL[p.role]||''}</span></button>`).join('')}</div>
+ <div class="row" style="margin-top:8px"><select data-pf="type">${[['ALL','Todos'],['SCRIM','Só scrims'],['OFFICIAL','Só oficiais']].map(([k,l])=>`<option value="${k}" ${f.type===k?'selected':''}>${l}</option>`).join('')}</select>
+ <label class="mu">De <input type="date" data-pf="from" value="${f.from}"></label><label class="mu">até <input type="date" data-pf="to" value="${f.to}"></label>${f.from||f.to?'<button data-act="clrp">Limpar período</button>':''}</div>
+ <h2>${esc(cur.p.name)} · ${RL[cur.p.role]||'Suplente'}</h2>
+ <div class="grid">${[['Jogos',tg.g],['Winrate',pct(tg.w,tg.g)+(tg.g?` <span class="mu">(${tg.w}V ${tg.g-tg.w}D)</span>`:'')],['KDA médio',kd(tg)],['CS/min',tg.min?(tg.cs/tg.min).toFixed(1):'—'],['Campeão mais jogado',cur.most?chip(cur.most.champ)+' ('+cur.most.g+')':'—'],['Melhor campeão (≥3 jogos)',best?chip(best.champ)+' '+pct(best.w,best.g):'—']].map(([a,b])=>`<div class="cd"><div class="mu">${a}</div><b>${b}</b></div>`).join('')}</div>
+ <div class="cd sc pb"><table><tr>${th('champ','Campeão')}${th('g','Jogos')}${th('w','V')}${th('l','D')}${th('wr','Winrate')}${th('kda','KDA')}${th('csm','CS/min')}${th('last','Último jogo')}</tr>
+ ${rows.map(c=>{const star=c.g>=3&&c.wr>=.6;return `<tr data-act="open" data-k="${esc(c.champ)}" style="cursor:pointer;${star?'box-shadow:inset 3px 0 var(--g)':''}"><td>${chip(c.champ)} ${c.g<3?'<span class="b" title="Menos de 3 jogos">amostra pequena</span>':''}${star?' <span class="b" style="border-color:var(--g);color:var(--g)">★ forte</span>':''}</td><td>${c.g}</td><td>${c.w}</td><td>${c.l}</td><td><div class="row"><div class="bar" style="width:70px"><i style="width:${c.wr*100}%"></i></div>${pct(c.w,c.g)}</div></td><td>${(c.k/c.g).toFixed(1)}/${(c.d/c.g).toFixed(1)}/${(c.a/c.g).toFixed(1)} <b>${c.kda.toFixed(2)}</b></td><td>${c.csm.toFixed(1)}</td><td>${c.last}</td></tr>`+(f.open===c.champ?`<tr><td colspan="8"><div class="sc"><table><tr><th>Data</th><th>Adversário</th><th>Tipo</th><th>Res.</th><th>K/D/A</th><th>CS</th><th>Ouro</th><th>Dano</th></tr>${[...c.h].sort((a,b)=>b.s.date.localeCompare(a.s.date)).map(x=>`<tr><td>${x.s.date}</td><td>${esc(x.s.opp)}</td><td>${x.s.type==='OFFICIAL'?'Oficial':'Scrim'}</td><td class="${x.g.win?'w':'l'}">${x.g.win?'V':'D'}</td><td>${x.p.k??'-'}/${x.p.d??'-'}/${x.p.a??'-'}</td><td>${x.p.cs??'-'}</td><td>${x.p.gold??'-'}</td><td>${x.p.dmg??'-'}</td></tr>`).join('')}</table></div></td></tr>`:'')}).join('')||'<tr><td colspan="8" class="mu">Sem jogos neste filtro.</td></tr>'}</table></div>
+ <p class="mu">As estatísticas são calculadas automaticamente a partir de todas as séries guardadas. Cada nova scrim entra aqui assim que a guardas.</p>`;
+}
+function vOpp(){
+ const m={};S.series.forEach(s=>{const o=m[s.opp.toLowerCase()]||(m[s.opp.toLowerCase()]={n:s.opp,sw:0,sl:0,gw:0,gl:0});const[w,l]=sres(s);o.gw+=w;o.gl+=l;if(w>l)o.sw++;else if(l>w)o.sl++});
+ const cnt=(arr)=>Object.entries(arr.reduce((a,x)=>(x&&(a[x]=(a[x]||0)+1),a),{})).sort((a,b)=>b[1]-a[1]).slice(0,8);
+ const gs=games().map(x=>x.g),ours=gs.flatMap(g=>g.bans?.[g.side]||[]),theirs=gs.flatMap(g=>g.bans?.[g.side==='blue'?'red':'blue']||[]),picks=gs.flatMap(g=>g.p.filter(p=>p.team===g.side).map(p=>p.champ));
+ const lst=(t,a)=>`<div class="cd"><b>${t}</b>${a.map(([c,n])=>`<div class="row" style="justify-content:space-between"><span>${chip(c)}</span><span class="mu">${n}</span></div>`).join('')||'<div class="mu">—</div>'}</div>`;
+ return `<div class="cd sc"><table><tr><th>Adversário</th><th>Séries</th><th>Jogos</th><th>Winrate (jogos)</th></tr>${Object.values(m).sort((a,b)=>b.gw+b.gl-a.gw-a.gl).map(o=>`<tr><td>${esc(o.n)}</td><td>${o.sw}-${o.sl}</td><td>${o.gw}-${o.gl}</td><td>${pct(o.gw,o.gw+o.gl)}</td></tr>`).join('')||'<tr><td class="mu">Sem dados.</td></tr>'}</table></div>
+ <div class="grid">${lst('Mais banidos por nós',cnt(ours))}${lst('Mais banidos contra nós',cnt(theirs))}${lst('Picks mais jogados',cnt(picks))}</div>`;
+}
+function vSet(){
+ const ps=[...S.players].sort((a,b)=>ROLES.indexOf(a.role)-ROLES.indexOf(b.role));
+ return `<div class="cd"><h2>Equipa</h2><input data-team value="${esc(S.team)}"></div>
+ <div class="cd sc"><h2>Roster</h2><table><tr><th>Nome</th><th>Role</th><th>Nomes de invocador / alts (separados por vírgula)</th><th></th></tr>${ps.map(p=>`<tr><td><input data-pp="name" data-id="${p.id}" value="${esc(p.name)}"></td><td><select data-pp="role" data-id="${p.id}">${[...ROLES,'SUB'].map(r=>`<option value="${r}" ${p.role===r?'selected':''}>${RL[r]||'Suplente'}</option>`).join('')}</select></td><td><input data-pp="names" data-id="${p.id}" value="${esc((p.names||[]).join(', '))}"></td><td><button data-act="delp" data-id="${p.id}">${S.armed===p.id?'Confirmar':'✕'}</button></td></tr>`).join('')}</table>
+ <button data-act="addp" style="margin-top:8px">＋ Adicionar jogador</button></div>
+ <div class="cd"><h2>Dados</h2><div class="row"><button data-act="export">Exportar JSON</button><button data-act="site">1. Exportar site (index.html, só uma vez)</button><button data-act="datajson">2. Exportar dados (data.json, após cada scrim)</button><label class="b" style="padding:7px 12px;cursor:pointer">Importar backup<input type="file" accept=".json" data-import hidden></label></div></div>`;
+}
+function vForm(){
+ const d=S.draft,opps=[...new Set(S.series.map(s=>s.opp))];
+ return `<div class="cd"><h2>Novo resultado</h2><div class="row">
+ <select data-d="type"><option value="SCRIM" ${d.type==='SCRIM'?'selected':''}>Scrim</option><option value="OFFICIAL" ${d.type==='OFFICIAL'?'selected':''}>Oficial</option></select>
+ <input type="date" data-d="date" value="${d.date}"><input data-d="opp" list="opps" placeholder="Adversário" value="${esc(d.opp)}"><datalist id="opps">${opps.map(o=>`<option value="${esc(o)}">`).join('')}</datalist>
+ <select data-d="format">${Object.keys(FM).map(f=>`<option ${d.format===f?'selected':''}>${f}</option>`).join('')}</select></div>
+ <div class="dz" style="margin-top:10px" id="dz">Arrasta capturas de ecrã para aqui, cola com Ctrl+V ou <label style="color:var(--ac);cursor:pointer;text-decoration:underline">escolhe ficheiros<input type="file" accept="image/*" multiple hidden data-files></label>
+ <div class="mu" style="margin-top:6px">${d.files.length?d.files.length+' imagem(ns): '+d.files.map(f=>esc(f.name||'colada')).join(', '):'Um resumo da série ou uma imagem por jogo.'}</div></div>
+ <label class="mu" style="display:block;margin-top:10px">Nomes de invocador da nossa equipa (separados por vírgula). A IA usa-os para saber qual é a nossa equipa.</label><input data-ours style="width:100%" placeholder="COCO, scooby, …" value="${esc(S.ours||'')}">
+ ${d.err?`<div class="msg err">${esc(d.err)}</div>`:''}
+ <div class="row" style="margin-top:10px"><button class="p big" data-act="analyze" ${d.busy||!d.files.length||!S.sample?'disabled':''}>${d.busy?'A ler as imagens… (pode demorar até 1 min)':'Analisar com IA'}</button><button data-act="manual" ${d.busy?'disabled':''}>Preencher manualmente</button><button data-act="cancel" ${d.busy?'disabled':''}>Cancelar</button></div>
+ ${S.sample?'':'<p class="mu">A leitura por IA não está disponível nesta vista; usa o preenchimento manual.</p>'}</div>`;
+}
+const chsel=(g,i,p)=>{if(p.custom)return `<input class="${p.champ?'':'lo'}" data-g="${g}" data-i="${i}" data-f="champ" value="${esc(p.champ||'')}" placeholder="Campeão">`;const c=p.champ||'',lo=((p.conf?.champ??1)<.8)||!c,known=CH.includes(c);return `<select class="${lo?'lo':''}" data-g="${g}" data-i="${i}" data-f="champ"><option value="">—</option>${!known&&c?`<option value="${esc(c)}" selected>${esc(c)} (?)</option>`:''}${known?CHOPTS.replace('value="'+esc(c)+'"','value="'+esc(c)+'" selected'):CHOPTS}<option value="__other__">✎ Outro…</option></select>`};
+function vReview(){
+ const d=S.draft,[w,l]=[d.games.filter(g=>g.win).length,d.games.filter(g=>!g.win).length],opps=[...new Set(S.series.map(x=>x.opp))];
+ const inp=(g,i,p,f,t='text')=>{const c=p.conf?.[f],lo=(c!=null&&c<.8)||(p[f]==null&&p.conf&&Object.keys(p.conf).length&&f!=='gold'&&f!=='dmg');return `<input ${t==='n'?'type="number" style="max-width:70px"':''} class="${lo?'lo':''}" data-g="${g}" data-i="${i}" data-f="${f}" value="${esc(p[f]??'')}">`};
+ return `<div class="cd"><h2>Revisão · resultado <span class="${w>l?'w':'l'}">${w}-${l}</span></h2><div class="row">
+ <select data-d="type"><option value="SCRIM" ${d.type==='SCRIM'?'selected':''}>Scrim</option><option value="OFFICIAL" ${d.type==='OFFICIAL'?'selected':''}>Oficial</option></select>
+ <input type="date" data-d="date" value="${d.date}"><input data-d="opp" list="opps2" placeholder="Equipa adversária" value="${esc(d.opp)}" class="${d.opp.trim()?'':'lo'}"><datalist id="opps2">${opps.map(o=>`<option value="${esc(o)}">`).join('')}</datalist>
+ <select data-d="format">${Object.keys(FM).map(f=>`<option ${d.format===f?'selected':''}>${f}</option>`).join('')}</select></div>
+ <div class="mu" style="margin-top:6px">Campos a amarelo têm baixa confiança ou estão por preencher. Corrige o que for preciso.</div></div>
+ ${d.games.map((g,gi)=>`<div class="cd"><div class="row"><b>Jogo ${gi+1}</b><label>Nossa equipa <select data-gf="side" data-g="${gi}"><option value="blue" ${g.side==='blue'?'selected':''}>Blue</option><option value="red" ${g.side==='red'?'selected':''}>Red</option></select></label>
+ <select data-gf="win" data-g="${gi}"><option value="1" ${g.win?'selected':''}>Vitória</option><option value="0" ${!g.win?'selected':''}>Derrota</option></select>
+ <label>Duração <input data-gf="dur" data-g="${gi}" value="${fmtDur(g.dur)}" style="width:70px" placeholder="mm:ss"></label><button data-act="rmg" data-g="${gi}" style="margin-left:auto">Remover jogo</button></div>
+ ${g.warn?`<div class="msg err">${esc(g.warn)}</div>`:''}
+ <div class="sc"><table><tr><th>Equipa</th><th>Jogador</th><th>Invocador</th><th>Campeão</th><th>K</th><th>D</th><th>A</th><th>CS</th><th>Ouro</th><th>Dano</th><th></th></tr>
+ ${g.p.map((p,i)=>`<tr class="${p.team}"><td>${p.team===g.side?'Nós':'Eles'}<span class="mu"> · ${RL[ROLES[g.p.slice(0,i).filter(x=>x.team===p.team).length]]||''}</span></td><td>${p.team===g.side?`<select class="${p.pid?'':'lo'}" data-g="${gi}" data-i="${i}" data-f="pid"><option value="">— ignorar —</option>${S.players.map(x=>`<option value="${x.id}" ${p.pid===x.id?'selected':''}>${esc(x.name)}</option>`).join('')}</select>`:''}</td><td>${inp(gi,i,p,'name')}</td><td>${chsel(gi,i,p)}</td><td>${inp(gi,i,p,'k','n')}</td><td>${inp(gi,i,p,'d','n')}</td><td>${inp(gi,i,p,'a','n')}</td><td>${inp(gi,i,p,'cs','n')}</td><td>${inp(gi,i,p,'gold','n')}</td><td>${inp(gi,i,p,'dmg','n')}</td><td style="white-space:nowrap"><button data-act="mv" data-g="${gi}" data-i="${i}" data-d="-1" title="Subir">▲</button><button data-act="mv" data-g="${gi}" data-i="${i}" data-d="1" title="Descer">▼</button></td></tr>`).join('')}</table></div></div>`).join('')}
+ ${d.err?`<div class="msg err">${esc(d.err)}</div>`:''}${d.dupWarn?'<div class="msg err">Este jogo parece já existir (mesma data, campeões e duração). Carrega outra vez em “Guardar” para guardar mesmo assim.</div>':''}
+ <div class="row"><button class="p big" data-act="save" ${d.busy?'disabled':''}>${d.busy?'A guardar…':'Confirmar e guardar'}</button><button data-act="addg">＋ Jogo</button><button data-act="cancel">Cancelar</button></div>`;
+}
+
+/* ---------- lógica ---------- */
+function sortTeams(g){const ix=new Map(g.p.map((p,i)=>[p,i])),r=p=>{const pl=p.team===g.side&&p.pid?S.players.find(x=>x.id===p.pid):null,i=ROLES.indexOf(pl&&ROLES.includes(pl.role)?pl.role:p.role);return i<0?99:i};g.p=['blue','red'].flatMap(t=>g.p.filter(p=>p.team===t).sort((a,b)=>r(a)-r(b)||ix.get(a)-ix.get(b)))}
+function assign(g){g.p.forEach(p=>{p.pid=p.team===g.side?matchPlayer(p.name):null})}
+async function analyze(){
+ const d=S.draft;d.busy=true;d.err='';render();
+ try{
+  const lim=await S.sample.limits(),max=lim.images?.maxCount||4;
+  const r=await S.sample.json(mkPrompt(),{images:d.files.slice(0,max),modelTier:'complex',cache:false});
+  const gs=(r.games||[]).map((x,i)=>{
+   const g=blank(x.gameNumber||i+1);g.dur=x.durationSec??null;g.bans={blue:(x.bans?.blue||[]).map(fixChamp),red:(x.bans?.red||[]).map(fixChamp)};
+   g.p=(x.players||[]).map(p=>({team:p.team==='red'?'red':'blue',name:p.summoner||'',champ:fixChamp(p.champion),role:p.role||null,k:p.kills,d:p.deaths,a:p.assists,cs:p.cs,gold:p.gold,dmg:p.damage,pid:null,conf:p.conf||{}}));
+   const m={blue:0,red:0};g.p.forEach(p=>{if(isOurs(p.name))m[p.team]++});
+   if(m.blue===m.red&&(x.ourTeam==='blue'||x.ourTeam==='red')&&m.blue+m.red>=0&&oursList().length){g.side=x.ourTeam}
+   else if(m.blue===m.red){g.side='blue';g.warn='A app não encontrou os vossos nomes de invocador nesta imagem, por isso não sabe qual das duas equipas é a vossa. Escolhe abaixo em “Nossa equipa” se vocês são Blue ou Red, e depois escolhe o jogador de cada linha da vossa equipa.'}else g.side=m.blue>m.red?'blue':'red';
+   g.win=x.winner?x.winner===g.side:true;if(!x.winner)g.warn+=' Vencedor não identificado, confirma o resultado.';
+   assign(g);sortTeams(g);return g});
+  if(!gs.length)throw {text:'Não consegui ler nenhum jogo. Tenta uma captura mais nítida ou preenche manualmente.'};
+  d.games=gs;d.stage='review';d.err=(r.warnings||[]).join(' ');
+ }catch(e){d.err=e.text||(e.code==='not_granted'?'Precisas de permitir que a app use o Claude.':e.code==='invalid_json'?'Não consegui ler as imagens. Tenta uma captura mais nítida ou preenche manualmente.':'Erro na análise ('+(e.code||'desconhecido')+'). Tenta de novo ou preenche manualmente.')}
+ d.busy=false;render();
+}
+const gkey=(s,g)=>s.date+'|'+g.dur+'|'+g.p.map(p=>norm(p.champ)).sort().join(',');
+const toast=(t,bad)=>{const e=$('#toast');e.textContent=trs(t);e.style.borderColor=bad?'var(--r)':'var(--ac)';e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display='none',8000)};
+window.addEventListener('unhandledrejection',e=>toast('Erro: '+(e.reason&&(e.reason.message||e.reason.code)||e.reason),1));
+window.addEventListener('error',e=>toast('Erro: '+e.message,1));
+const W=async(fn,label)=>{const run=()=>Promise.race([fn(),new Promise((_,r)=>setTimeout(()=>r({code:'timeout',message:'Tempo esgotado ao gravar ('+label+')'}),15000))]);try{return await run()}catch(e){if(e&&e.code==='unavailable'){await new Promise(r=>setTimeout(r,600+Math.random()*600));return await run()}throw e}};
+async function save(){
+ const d=S.draft;if(!d||d.busy)return;d.err='';
+ try{
+  if(!d.opp.trim()){d.err='Escreve o nome da equipa adversária (campo no topo da página).';toast(d.err,1);render();return window.scrollTo(0,0)}
+  if(!d.games.length){d.err='Adiciona pelo menos um jogo.';toast(d.err,1);return render()}
+  const cand=d.games.map(g=>gkey(d,g));
+  const dup=S.series.some(x=>x.id!==d.id&&(x.games||[]).some(g=>cand.includes(gkey(x,g))));
+  if(dup&&!d.dupWarn){d.dupWarn=true;toast('Este jogo parece já existir. Carrega outra vez em “Confirmar e guardar” para guardar mesmo assim.',1);return render()}
+  d.busy=true;render();toast('A guardar…');
+  try{const P=window.claude&&await Promise.race([claude.use('permissions'),new Promise(r=>setTimeout(()=>r(null),3000))]);if(P){const st=await P.state();if(Object.values(st).includes('prompt')){toast('Aceita o pedido de permissões do Claude para poder guardar.');await Promise.race([P.request(),new Promise(r=>setTimeout(r,30000))])}}}catch(e){}
+  for(const g of d.games)for(const p of g.p){if(p.team!==g.side||p.pid||!p.name||!isOurs(p.name))continue;const m=matchPlayer(p.name);if(m){p.pid=m;continue}const id=uid(),np={name:p.name,role:ROLES.includes(p.role)?p.role:'SUB',names:[p.name]};await W(()=>S.db.doc('players/'+id).set(np),'jogador '+p.name);S.players.push({id,...np});p.pid=id}
+  const shots=d.shots||[];
+  const s=JSON.parse(JSON.stringify({id:d.id||uid(),date:d.date,type:d.type,format:d.format,opp:d.opp.trim(),notes:d.notes||'',shots,
+   games:d.games.map((g,i)=>({n:i+1,win:g.win,side:g.side,dur:g.dur,bans:g.bans,p:g.p.map((p,k)=>({team:p.team,name:p.name,champ:fixChamp(p.champ),role:ROLES[g.p.slice(0,k).filter(x=>x.team===p.team).length]||p.role||null,k:p.k,d:p.d,a:p.a,cs:p.cs,gold:p.gold,dmg:p.dmg,pid:p.team===g.side?(p.pid||null):null}))}))}));
+  toast('A guardar a série…');await W(()=>S.db.doc('series/'+s.id).set(s),'série');
+  for(const g of s.games)for(const p of g.p){if(!p.pid||!p.name)continue;const pl=S.players.find(x=>x.id===p.pid);if(pl&&![pl.name,...(pl.names||[])].some(n=>norm(n)===norm(p.name))){pl.names=[...(pl.names||[]),p.name];try{await W(()=>S.db.doc('players/'+pl.id).update({names:pl.names}),'alt account')}catch(e){}}}
+  const [w,l]=sres(s);let mvp=null,ms=-1;s.games.forEach(g=>g.p.forEach(p=>{if(p.team===g.side&&p.pid){const v=((+p.k||0)+(+p.a||0))/Math.max(1,+p.d||0);if(v>ms){ms=v;mvp=p}}}));
+  S.msg=`${s.type==='OFFICIAL'?'Oficial':'Scrim'} vs ${s.opp} — ${w}-${l} ${w>l?'✅':w<l?'❌':'➖'}`+(mvp?` | MVP: ${pname(mvp.pid)} (${mvp.champ}, KDA ${mvp.k}/${mvp.d}/${mvp.a})`:'');
+  const up=[...new Set(s.games.flatMap(g=>g.p.filter(p=>p.team===g.side&&p.pid).map(p=>pname(p.pid))))],lost=[...new Set(s.games.flatMap(g=>g.p.filter(p=>p.team===g.side&&!p.pid&&p.name).map(p=>p.name)))];
+  S.msg+=' | Estatísticas atualizadas: '+(up.join(', ')||'nenhum jogador')+(lost.length?' | ⚠ Sem jogador associado: '+lost.join(', '):'');
+  S.draft=null;S.tab='res';render();window.scrollTo(0,0);toast('Guardado ✓ '+S.msg);
+  if(S.assets&&d.files.length){const ids=[];for(const f of d.files){try{ids.push((await Promise.race([S.assets.upload(f),new Promise((_,r)=>setTimeout(()=>r(new Error('timeout')),20000))])).id)}catch(e){}}
+   if(ids.length)try{await S.db.doc('series/'+s.id).update({shots:[...shots,...ids]})}catch(e){}}
+ }catch(e){d.err='Não consegui guardar: '+(e&&(e.message||e.code)||'erro desconhecido')+(e&&e.code?' ['+e.code+']':'')+'. Os dados que preencheste continuam aqui, podes tentar outra vez.';d.busy=false;toast(d.err,1);render()}
+}
+const addFiles=fs=>{if(S.draft?.stage!=='form')return;[...fs].filter(f=>f.type.startsWith('image/')).forEach(f=>S.draft.files.push(f));render()};
+
+/* ---------- eventos ---------- */
+const mkSnap=()=>({team:S.team,at:new Date().toLocaleString('pt-PT',{dateStyle:'short',timeStyle:'short'}),players:S.players,series:S.series.map(x=>({...x,shots:[]}))});
+document.addEventListener('click',async e=>{
+ const el=e.target.closest('[data-act]');if(!el)return;const a=el.dataset.act,id=el.dataset.id;
+ if(a==='lang'){S.lang=el.dataset.k;try{localStorage.setItem('lol-lang',S.lang)}catch(x){}}
+ else if(a==='tab'){S.tab=el.dataset.k;S.msg=''}
+ else if(a==='new'){S.draft=newDraft();S.msg=''}
+ else if(a==='cancel')S.draft=null;
+ else if(a==='analyze')return analyze();
+ else if(a==='manual'){S.draft.games=[blank(1)];S.draft.stage='review'}
+ else if(a==='mv'){const g=S.draft.games[+el.dataset.g],i=+el.dataset.i,p=g.p[i],same=g.p.map((x,k)=>x.team===p.team?k:-1).filter(k=>k>=0),j=same[same.indexOf(i)+ +el.dataset.d];if(j!=null){[g.p[i],g.p[j]]=[g.p[j],g.p[i]]}}
+ else if(a==='addg')S.draft.games.push(blank(S.draft.games.length+1));
+ else if(a==='rmg')S.draft.games.splice(+el.dataset.g,1);
+ else if(a==='save')return save();
+ else if(a==='edit'){const s=S.series.find(x=>x.id===id);S.draft={...newDraft(),...JSON.parse(JSON.stringify(s)),stage:'review',files:[]}}
+ else if(a==='del'||a==='delp'){if(S.armed!==id){S.armed=id}else{S.armed=null;try{await S.db.doc((a==='del'?'series/':'players/')+id).delete()}catch(x){S.msg='Sem permissão para apagar.'}}}
+ else if(a==='pick'){S.pf.pid=id;S.pf.open=null}
+ else if(a==='clrp'){S.pf.from='';S.pf.to=''}
+ else if(a==='sort'){const k=el.dataset.k;S.pf.dir=S.pf.sort===k?-S.pf.dir:-1;S.pf.sort=k}
+ else if(a==='open')S.pf.open=S.pf.open===el.dataset.k?null:el.dataset.k;
+ else if(a==='addp'){await S.db.doc('players/'+uid()).set({name:'Novo jogador',role:'TOP',names:[]})}
+ else if(a==='datajson'){try{await S.dl.save({filename:'data.json',data:JSON.stringify(mkSnap())});S.msg='Ficheiro data.json gerado. Substitui-o no GitHub para atualizar o site da equipa.'}catch(x){S.msg='Não consegui gerar o ficheiro ('+(x&&(x.code||x.message)||'erro')+').'}}
+ else if(a==='site'){try{
+  const css=document.getElementById('appcss').textContent,js=document.getElementById('appjs').textContent.replace(/<\/script/gi,'<\\/script');
+  const snap=mkSnap();
+  const html='<!DOCTYPE html><html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>'+esc(S.team)+'</title><style>'+css+'</style></head><body><div id="app"></div><div id="toast"></div><script>window.SNAP='+JSON.stringify(snap).replace(/</g,'\\u003c')+';<\/script><script>'+js+'<\/script></body></html>';
+  await S.dl.save({filename:'index.html',data:html});S.msg='Ficheiro index.html gerado. Publica-o uma vez no GitHub (só precisas de o fazer uma vez).'}catch(x){S.msg='Não consegui gerar o ficheiro ('+(x&&(x.code||x.message)||'erro')+').'}}
+ else if(a==='export'){const data=JSON.stringify({team:S.team,players:S.players,series:S.series},null,1);try{await S.dl.save({filename:'lol-scrims-backup.json',data})}catch(x){S.msg='Exportação cancelada ou indisponível.'}}
+ render();
+});
+document.addEventListener('input',async e=>{
+ const t=e.target,D=S.draft;
+ if(t.dataset.d){D[t.dataset.d]=t.value;D.dupWarn=false;return}
+ if(t.dataset.gf){const g=D.games[+t.dataset.g],f=t.dataset.gf;
+  if(f==='side'){g.side=t.value;g.warn='';assign(g);sortTeams(g);render()}else if(f==='win')g.win=t.value==='1';else g.dur=parseDur(t.value);return}
+ if(t.dataset.f){const p=D.games[+t.dataset.g].p[+t.dataset.i],f=t.dataset.f;
+  if(f==='pid'){p.pid=t.value||null;t.classList.toggle('lo',!p.pid);return}
+  if(f==='champ'&&t.value==='__other__'){p.custom=true;p.champ='';render();return}
+  p[f]=['name','champ'].includes(f)?t.value:(t.value===''?null:+t.value);p.conf=p.conf||{};p.conf[f]=1;t.classList.remove('lo');D.dupWarn=false;return}
+ if(t.dataset.rf){S.rf[t.dataset.rf]=t.value;render();return}
+ if(t.dataset.pf){S.pf[t.dataset.pf]=t.value;S.pf.open=null;render();return}
+});
+document.addEventListener('change',async e=>{
+ const t=e.target;
+ if(t.dataset.f==='champ'&&t.value!=='__other__'){t.value=fixChamp(t.value);S.draft.games[+t.dataset.g].p[+t.dataset.i].champ=t.value}
+ if(t.dataset.files!==undefined){addFiles(t.files)}
+ if(t.dataset.team!==undefined){S.team=t.value;try{await S.db.doc('meta/team').set({name:t.value,ours:S.ours||''})}catch(x){}}
+ if(t.dataset.ours!==undefined){S.ours=t.value;try{await S.db.doc('meta/team').set({name:S.team,ours:S.ours})}catch(x){}}
+ if(t.dataset.pp){const v=t.dataset.pp==='names'?t.value.split(',').map(x=>x.trim()).filter(Boolean):t.value;try{await S.db.doc('players/'+t.dataset.id).update({[t.dataset.pp]:v})}catch(x){S.msg='Sem permissão para editar.';render()}}
+ if(t.dataset.import!==undefined&&t.files[0]){try{const j=JSON.parse(await t.files[0].text());for(const p of j.players||[]){const{id,...r}=p;await S.db.doc('players/'+id).set(r)}for(const s of j.series||[])await S.db.doc('series/'+s.id).set(s);if(j.team)await S.db.doc('meta/team').set({name:j.team});S.msg='Backup importado.'}catch(x){S.msg='Ficheiro de backup inválido ou sem permissão.'}render()}
+});
+document.addEventListener('paste',e=>addFiles(e.clipboardData?.files||[]));
+document.addEventListener('dragover',e=>{if(S.draft?.stage==='form')e.preventDefault()});
+document.addEventListener('drop',e=>{if(S.draft?.stage==='form'){e.preventDefault();addFiles(e.dataTransfer.files)}});
+
+(async()=>{
+ try{S.lang=localStorage.getItem('lol-lang')||'pt'}catch(e){S.lang='pt'}
+ if(window.SNAP){S.snap=true;S.can=false;S.ready=true;S.dbDone=true;const ap=d=>{S.team=d.team||S.team;S.players=d.players||[];S.series=d.series||[];window.SNAP.at=d.at||window.SNAP.at};ap(window.SNAP);render();
+  try{const r=await fetch('data.json?t='+Date.now(),{cache:'no-store'});if(r.ok){ap(await r.json());render()}}catch(e){}
+  return}
+ const use=n=>Promise.race([window.claude?claude.use(n):null,new Promise(r=>setTimeout(()=>r(null),15000))]).catch(()=>null);
+ use('sample').then(x=>{S.sample=x;render()});use('assets').then(x=>{S.assets=x});use('downloads').then(x=>{S.dl=x});
+ use('user').then(u=>{S.can=u?u.can('data.write')!==false:true;render()});
+ S.db=await use('db');S.dbDone=true;
+ if(S.db){
+  setTimeout(()=>{if(!S.ready){S.ready=true;render()}},5000);
+  const done=()=>{S.ready=true;render()};
+  const sub=(c,fn)=>{try{S.db.collection(c).onSnapshot(s=>{fn(s);done()},e=>{S.err=e&&e.code;done()})}catch(e){S.err=String(e);done()}};
+  sub('players',s=>{S.players=s.docs.map(d=>({id:d.id,...d.data()}))});
+  sub('series',s=>{S.series=s.docs.map(d=>({id:d.id,...d.data()}))});
+  sub('meta',s=>{const t=s.docs.find(d=>d.id==='team');if(t){S.team=t.data().name||S.team;S.ours=t.data().ours||''}});
+ }else{S.ready=true;render()}
+})();
+</script></body></html>
